@@ -85,11 +85,13 @@
         pending = false;
         text = '';
         selectedAssignment.set($assignments[get(selectedAssignment).assignment_order]);
+        return;
       }
 
       if (firstResponse.status === 404) {
         alert("You already have another submission")
         pending = false;
+        return;
       }
 
       await fetch("/api/grade", {
