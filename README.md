@@ -13,5 +13,7 @@ Check out RUNNING.md
 
 ## Tech stacks:
 Frontend: Svelte, Astro, TailwindCSS
+
 Backend: Deno, PostgreSQL, RabbitMQ, WebSocket
+
 Other tools: Nginx, Playwright, k6
