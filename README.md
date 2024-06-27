@@ -8,6 +8,9 @@ When the user opens up the application, they are shown a name and a handout of a
 Below is the image of the architecture of the web application
 ![screenshot](assets/details.png)
 
+## View of the web application:
+![screenshot](assets/view.png)
+
 ## How to run the project:
 Check out RUNNING.md
 
@@ -16,4 +19,4 @@ Frontend: Svelte, Astro, TailwindCSS
 
 Backend: Deno, PostgreSQL, RabbitMQ, WebSocket
 
-Other tools: Nginx, Playwright, k6
+Other tools: Nginx, Playwright, k6, Docker, Docker Compose

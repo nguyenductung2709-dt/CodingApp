@@ -113,7 +113,6 @@ const consumeMessages = async () => {
     async (args, props, data) => {
       if (data) {
         const submission = JSON.parse(new TextDecoder().decode(data));
-        console.log(submission);
         const code = await programmingAssignmentService.findSpecificAssignment(submission.assignmentId);
         const testCode = code[0].test_code;
         const requestData = {
@@ -172,7 +171,6 @@ const handlePostSubmission = async (request) => {
     const oldSubmissions = await programmingAssignmentService.findSpecificSubmissionsOfUser(requestData.userId, requestData.assignmentId);
     const oldSubmission = oldSubmissions.find(sub => sub.code === requestData.code);
     const oldCodes = oldSubmissions.map(submission => submission.code);
-    console.log(userSubmissions)
     if (userSubmissions.length > 0 && userSubmissions[userSubmissions.length - 1].status === "pending") {
       return new Response(JSON.stringify({ error: "You have already have a submission" }), {
         status: 404,
@@ -208,20 +206,19 @@ const handlePostSubmission = async (request) => {
 };
 
 const handleWebSocket = async (request) => {
-  console.log("Creating WS connection");
+  console.log("Initialize WebSocket connection");
   const { socket, response } = Deno.upgradeWebSocket(request);
   const params = new URL(request.url).searchParams;
   const assignmentId = params.get("assignmentId");
   const userId = params.get("userId");
   const fullId = `${assignmentId}-${userId}`;
-  socket.onopen = () => console.log("WS connected");
-  socket.onmessage = (e) => console.log(`Received a message: ${e.data}`);
+  socket.onopen = () => console.log("WebSocket is connected");
+  socket.onmessage = (message) => console.log(`Received a message: ${message.data}`);
   socket.onclose = () => {
     console.log("WS closed");
     delete sockets[fullId];
   };
   sockets[fullId] = socket;
-  console.log(sockets);
   return response;
 }
 

@@ -7,7 +7,6 @@
     
     const changeSelectedAssignment = async (assignment) => {
         selectedAssignment.set(assignment);
-        console.log($selectedAssignment);
     }
 
     const fetchAssignment = async () => {
@@ -30,7 +29,6 @@
 
         const dataNew = await responseNew.json();
         completedTasks = dataNew;
-        console.log(completedTasks);
 
         correctStatus.set(new Array($assignments.length).fill(false));
         correctStatus.update((status) => {
@@ -40,7 +38,6 @@
             return status;
         });
     };
-    console.log($correctStatus)
     
     onMount(fetchAssignment);
 </script>

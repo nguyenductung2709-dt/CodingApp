@@ -10,18 +10,16 @@
   const createWebSocketConnection = (assignmentId, userId) => {
       socket = new WebSocket(`ws://${window.location.host}/api/ws?assignmentId=${assignmentId}&userId=${userId}`);
       
-      socket.onopen = () => console.log("WebSocket connection created");
+      socket.onopen = () => console.log("WebSocket connection established");
       socket.onmessage = handleMessage;
       socket.onclose = () => {
           console.log("WebSocket connection closed");
       };
-      socket.onerror = (e) => console.error("WebSocket error:", e);
+      socket.onerror = (error) => console.error("WebSocket error:", error);
   }
 
-  const handleMessage = async(messageEvent) => {
-      const message = JSON.parse(messageEvent.data);
-      console.log("Received message:");
-      console.log(message);
+  const handleMessage = async(messageData) => {
+      const message = JSON.parse(messageData.data);
       const result = message.result;
       const submission = message.submission;
       if (message) {
@@ -47,7 +45,6 @@
             status[get(selectedAssignment).assignment_order - 1] = true;
             return status;
           });
-          console.log($correctStatus)
           selectedAssignment.set($assignments[get(selectedAssignment).assignment_order]);
           text = ''
           
@@ -58,7 +55,6 @@
             },
           });
           const dataNew = await responseNew.json();
-          console.log(dataNew)
           points.update(() => dataNew.length * 100);
           localStorage.setItem("points", dataNew.length * 100);
         }
