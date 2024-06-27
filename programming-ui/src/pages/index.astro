@@ -1,0 +1,10 @@
+---
+import Layout from "../layout/Layout.astro";
+import ProgrammingTask from '../components/right_side/ProgrammingTask.svelte';
+import MultipleTasks from '../components/left_side/MultipleTasks.svelte';
+---
+
+<Layout>
+  <MultipleTasks client:only="svelte" />
+  <ProgrammingTask client:only="svelte" />
+</Layout>
